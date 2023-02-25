@@ -1,10 +1,14 @@
 package dev.abdujabbor.internetconnection.ui
 
 import android.annotation.SuppressLint
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import dev.abdujabbor.internetconnection.databinding.ActivityCalculateBinding
@@ -30,7 +34,6 @@ class CalculateActivity : AppCompatActivity() {
         binding.textdol.text = array.CcyNm_EN  + "  to  " +"SO'M"
         binding.doltext.text =  "SO'M "+ "  to  " +array.CcyNm_EN
 
-        binding.tvResult.text = "saljfk"
 
         binding.etFrom.addTextChangedListener {
             if(binding.etFrom.text?.length==0){
@@ -40,7 +43,20 @@ class CalculateActivity : AppCompatActivity() {
             binding.tvResult2.text =binding.etFrom.text.toString()+array.Ccy+ " = "+ ((array.Rate.toDouble())*binding.etFrom.text.toString().toDouble()).toString() + "  SO'M"
         }
 
+        binding.copy.setOnClickListener {
+            copyToClipboard(binding.tvResult.text.toString())
+            Toast.makeText(this, "Copied", Toast.LENGTH_SHORT).show()
+        }
+        binding.copy2.setOnClickListener {
+            copyToClipboard(binding.tvResult2   .text.toString())
+            Toast.makeText(this, "Copied", Toast.LENGTH_SHORT).show()
+        }
 
+    }
 
+    fun Context.copyToClipboard(text: CharSequence){
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("label",text)
+        clipboard.setPrimaryClip(clip)
     }
 }

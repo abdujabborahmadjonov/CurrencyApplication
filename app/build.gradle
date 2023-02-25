@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -44,4 +45,16 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    //volley
+    implementation 'com.android.volley:volley:1.2.1'
+
+    //gson
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    //rx
+var room ="2.5.0"
+    implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
+    implementation "androidx.room:room-rxjava2:$room"
+    implementation "androidx.room:room-ktx:$room"
 }
